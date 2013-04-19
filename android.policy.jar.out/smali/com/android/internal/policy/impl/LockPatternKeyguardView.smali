@@ -73,7 +73,7 @@
 
 .field private mShowLockBeforeUnlock:Z
 
-.field private mSuppressBiometricUnlock:Z
+.field protected mSuppressBiometricUnlock:Z
 
 .field private mThemeChangeReceiver:Landroid/content/BroadcastReceiver;
 
@@ -83,7 +83,7 @@
 
 .field private mUnlockScreen:Landroid/view/View;
 
-.field private mUnlockScreenMode:Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;
+.field protected mUnlockScreenMode:Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;
 
 .field private final mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
 
@@ -2674,9 +2674,7 @@
 
     .prologue
     #todo: add alias name to miui res
-    const v0, 0x10202b2
-
-    invoke-virtual {p1, v0}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+    invoke-virtual {p0, p1}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->getFaceLockAreaView(Landroid/view/View;)Landroid/view/View;
 
     move-result-object v0
 
