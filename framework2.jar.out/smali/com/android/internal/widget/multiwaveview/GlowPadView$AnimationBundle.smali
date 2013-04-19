@@ -4,6 +4,10 @@
 
 
 # annotations
+.annotation build Landroid/annotation/MiuiHook;
+    value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->CHANGE_ACCESS:Landroid/annotation/MiuiHook$MiuiHookType;
+.end annotation
+
 .annotation system Ldalvik/annotation/EnclosingClass;
     value = Lcom/android/internal/widget/multiwaveview/GlowPadView;
 .end annotation
@@ -34,7 +38,7 @@
 
 
 # direct methods
-.method private constructor <init>(Lcom/android/internal/widget/multiwaveview/GlowPadView;)V
+.method constructor <init>(Lcom/android/internal/widget/multiwaveview/GlowPadView;)V
     .locals 0
     .parameter
 
