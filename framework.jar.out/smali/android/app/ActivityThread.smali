@@ -10972,7 +10972,7 @@
 
     .line 3786
     :cond_4
-    invoke-static {v0}, Landroid/app/MiuiThemeHelper;->handleExtraConfigurationChanges(I)V
+    invoke-static {v1}, Landroid/app/MiuiThemeHelper;->handleExtraConfigurationChanges(I)V
 
     iget-object v9, p1, Landroid/content/res/Configuration;->locale:Ljava/util/Locale;
 
@@ -12591,14 +12591,14 @@
 
     .line 1632
     .local v4, metrics:Landroid/util/DisplayMetrics;
-    new-instance v5, Landroid/content/res/Resources;
+    new-instance v5, Landroid/content/res/MiuiResources;
 
     .end local v5           #r:Landroid/content/res/Resources;
     invoke-virtual {p0}, Landroid/app/ActivityThread;->getConfiguration()Landroid/content/res/Configuration;
 
     move-result-object v7
 
-    invoke-direct {v5, v0, v4, v7, p2}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)V
+    invoke-direct {v5, v0, v4, v7, p2}, Landroid/content/res/MiuiResources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)V
 
     .line 1639
     .restart local v5       #r:Landroid/content/res/Resources;

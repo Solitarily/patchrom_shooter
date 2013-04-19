@@ -880,6 +880,12 @@
 
     sput v0, Landroid/media/AudioService;->SOUND_EFFECT_VOLUME_DB:I
 
+    new-instance v0, Lmiui/view/VolumePanel;
+  
+    invoke-direct {v0, p1, p0}, Lmiui/view/VolumePanel;-><init>(Landroid/content/Context;Landroid/media/AudioService;)V
+
+    iput-object v0, p0, Landroid/media/AudioService;->mVolumePanel:Lmiui/view/VolumePanel;
+
     .line 458
     iput v11, p0, Landroid/media/AudioService;->mMode:I
 
@@ -9665,9 +9671,9 @@
     if-eqz v0, :cond_0
 
     .line 3691
-    iget-object v0, p0, Landroid/media/AudioService;->mVolumePanel:Landroid/view/VolumePanel;
+    iget-object v0, p0, Landroid/media/AudioService;->mVolumePanel:Lmiui/view/VolumePanel;
 
-    invoke-virtual {v0, p1, p2}, Landroid/view/VolumePanel;->postVolumeChanged(II)V
+    invoke-virtual {v0, p1, p2}, Lmiui/view/VolumePanel;->postVolumeChanged(II)V
 
     .line 3706
     :goto_0

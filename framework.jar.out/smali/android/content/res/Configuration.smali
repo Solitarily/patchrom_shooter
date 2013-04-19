@@ -996,32 +996,16 @@
 
     .line 858
     :cond_10
-    iget-object v1, p1, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
+    iget-object v1, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
 
-    if-eqz v1, :cond_12
+    iget-object v2, p1, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
 
-    iget-object v1, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    if-eqz v1, :cond_11
-
-    iget-object v1, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    iget-object v2, p1, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    invoke-virtual {v1, v2}, Landroid/content/res/CustomTheme;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v2}, Lmiui/content/res/ExtraConfiguration;->diff(Lmiui/content/res/ExtraConfiguration;)I
 
     move-result v1
 
-    if-nez v1, :cond_12
-
-    .line 860
-    :cond_11
-    const v1, 0x8000
-
     or-int/2addr v0, v1
 
-    .line 863
-    :cond_12
     return v0
 .end method
 
@@ -1240,7 +1224,15 @@
     add-int v0, v1, v2
 
     .line 1109
-    return v0
+    iget-object v1, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
+
+    invoke-virtual {v1}, Lmiui/content/res/ExtraConfiguration;->hashCode()I
+
+    move-result v1
+
+    add-int/2addr v1, v0
+
+    return v1
 
     :cond_1
     move v1, v2
@@ -1351,6 +1343,9 @@
 .method public readFromParcel(Landroid/os/Parcel;)V
     .locals 7
     .parameter "source"
+    .annotation build Landroid/annotation/MiuiHook;
+        value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->CHANGE_CODE:Landroid/annotation/MiuiHook$MiuiHookType;
+    .end annotation
 
     .prologue
     const/4 v2, 0x1
@@ -1572,8 +1567,11 @@
 .end method
 
 .method public setTo(Landroid/content/res/Configuration;)V
-    .locals 1
+    .locals 2
     .parameter "o"
+    .annotation build Landroid/annotation/MiuiHook;
+        value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->CHANGE_CODE:Landroid/annotation/MiuiHook$MiuiHookType;
+    .end annotation
 
     .prologue
     .line 462
@@ -1698,24 +1696,13 @@
 
     iput v0, p0, Landroid/content/res/Configuration;->seq:I
 
-    .line 486
-    iget-object v0, p1, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
+    iget-object v0, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
 
-    if-eqz v0, :cond_1
+    iget-object v1, p1, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
 
-    .line 487
-    iget-object v0, p1, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    invoke-virtual {v0}, Landroid/content/res/CustomTheme;->clone()Ljava/lang/Object;
-
-    move-result-object v0
-
-    check-cast v0, Landroid/content/res/CustomTheme;
-
-    iput-object v0, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
+    invoke-virtual {v0, v1}, Lmiui/content/res/ExtraConfiguration;->setTo(Lmiui/content/res/ExtraConfiguration;)V
 
     .line 489
-    :cond_1
     return-void
 .end method
 
@@ -1776,17 +1763,18 @@
 
     iput v1, p0, Landroid/content/res/Configuration;->seq:I
 
-    iput-object v2, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
     iget-object v0, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
 
-    invoke-virtual {v0, p1}, Lmiui/content/res/ExtraConfiguration;->readFromParcel(Landroid/os/Parcel;)V
+    invoke-virtual {v0}, Lmiui/content/res/ExtraConfiguration;->setToDefaults()V
 
-    return-void
+     return-void
 .end method
 
 .method public toString()Ljava/lang/String;
     .locals 2
+    .annotation build Landroid/annotation/MiuiHook;
+        value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->CHANGE_CODE:Landroid/annotation/MiuiHook$MiuiHookType;
+    .end annotation
 
     .prologue
     .line 492
@@ -2129,9 +2117,14 @@
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     .line 609
-    iget-object v1, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
+    iget-object v1, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+    invoke-virtual {v1}, Lmiui/content/res/ExtraConfiguration;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
 
     .line 610
     const/16 v1, 0x7d
@@ -3071,43 +3064,16 @@
 
     .line 757
     :cond_17
-    iget-object v1, p1, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
+    iget-object v1, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
 
-    if-eqz v1, :cond_19
+    iget-object v2, p1, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
 
-    iget-object v1, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    if-eqz v1, :cond_18
-
-    iget-object v1, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    iget-object v2, p1, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    invoke-virtual {v1, v2}, Landroid/content/res/CustomTheme;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v2}, Lmiui/content/res/ExtraConfiguration;->updateFrom(Lmiui/content/res/ExtraConfiguration;)I
 
     move-result v1
 
-    if-nez v1, :cond_19
-
-    .line 759
-    :cond_18
-    const v1, 0x8000
-
     or-int/2addr v0, v1
 
-    .line 760
-    iget-object v1, p1, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    invoke-virtual {v1}, Landroid/content/res/CustomTheme;->clone()Ljava/lang/Object;
-
-    move-result-object v1
-
-    check-cast v1, Landroid/content/res/CustomTheme;
-
-    iput-object v1, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    .line 763
-    :cond_19
     return v0
 
     .line 669
@@ -3248,13 +3214,9 @@
 
     invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
 
-    .line 954
-    iget-object v0, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
+    iget-object v0, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
 
-    if-nez v0, :cond_2
-
-    .line 955
-    invoke-virtual {p1, v1}, Landroid/os/Parcel;->writeInt(I)V
+    invoke-virtual {v0, p1, p2}, Lmiui/content/res/ExtraConfiguration;->writeToParcel(Landroid/os/Parcel;I)V
 
     .line 961
     :goto_2
@@ -3304,22 +3266,5 @@
     invoke-virtual {p1, v2}, Landroid/os/Parcel;->writeInt(I)V
 
     .line 958
-    iget-object v0, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    invoke-virtual {v0}, Landroid/content/res/CustomTheme;->getThemeId()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
-
-    .line 959
-    iget-object v0, p0, Landroid/content/res/Configuration;->customTheme:Landroid/content/res/CustomTheme;
-
-    invoke-virtual {v0}, Landroid/content/res/CustomTheme;->getThemePackageName()Ljava/lang/String;
-
-    move-result-object v0
-
-    invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeString(Ljava/lang/String;)V
-
     goto :goto_2
 .end method
