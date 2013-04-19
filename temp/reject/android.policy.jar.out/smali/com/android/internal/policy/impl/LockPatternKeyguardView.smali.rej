@@ -1,0 +1,74 @@
+*** LockPatternKeyguardView.smali	2013-04-18 19:45:32.000000000 +0000
+--- LockPatternKeyguardView.smali	2013-04-18 19:48:59.000000000 +0000
+***************
+*** 71,83 ****
+  
+  .field private mShowLockBeforeUnlock:Z
+  
+! .field private mSuppressBiometricUnlock:Z
+  
+  .field private mTransportControlView:Lcom/android/internal/widget/TransportControlView;
+  
+  .field private mUnlockScreen:Landroid/view/View;
+  
+! .field private mUnlockScreenMode:Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;
+  
+  .field private final mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+  
+--- 72,84 ----
+  
+  .field private mShowLockBeforeUnlock:Z
+  
+! .field protected mSuppressBiometricUnlock:Z
+  
+  .field private mTransportControlView:Lcom/android/internal/widget/TransportControlView;
+  
+  .field private mUnlockScreen:Landroid/view/View;
+  
+! .field protected mUnlockScreenMode:Lcom/android/internal/policy/impl/LockPatternKeyguardView$UnlockMode;
+  
+  .field private final mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+  
+***************
+*** 519,526 ****
+  
+  .method private getInitialMode()Lcom/android/internal/policy/impl/LockPatternKeyguardView$Mode;
+      .locals 2
+  
+      .prologue
+      iget-object v1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+  
+      invoke-virtual {v1}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getSimState()Lcom/android/internal/telephony/IccCard$State;
+--- 520,532 ----
+  
+  .method private getInitialMode()Lcom/android/internal/policy/impl/LockPatternKeyguardView$Mode;
+      .locals 2
++     .annotation build Landroid/annotation/MiuiHook;
++         value = .enum Landroid/annotation/MiuiHook$MiuiHookType;->CHANGE_CODE:Landroid/annotation/MiuiHook$MiuiHookType;
++     .end annotation
+  
+      .prologue
++     invoke-static {p0}, Lcom/android/internal/policy/impl/LockPatternKeyguardView$Injector;->updateShowLockBeforeUnlock(Lcom/android/internal/policy/impl/LockPatternKeyguardView;)V
++ 
+      iget-object v1, p0, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->mUpdateMonitor:Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;
+  
+      invoke-virtual {v1}, Lcom/android/internal/policy/impl/KeyguardUpdateMonitor;->getSimState()Lcom/android/internal/telephony/IccCard$State;
+***************
+*** 785,793 ****
+  
+      if-eqz v2, :cond_3
+  
+!     const v2, 0x10202b2
+! 
+!     invoke-virtual {p1, v2}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+  
+      move-result-object v0
+  
+--- 824,830 ----
+  
+      if-eqz v2, :cond_3
+  
+!     invoke-virtual {p0, p1}, Lcom/android/internal/policy/impl/LockPatternKeyguardView;->getFaceLockAreaView(Landroid/view/View;)Landroid/view/View;
+  
+      move-result-object v0
+  

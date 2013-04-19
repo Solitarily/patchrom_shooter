@@ -1,0 +1,23 @@
+*** PackageManagerService.smali	2013-04-18 19:42:16.000000000 +0000
+--- PackageManagerService.smali	2013-04-18 19:45:41.000000000 +0000
+***************
+*** 14665,14670 ****
+      .end local v23           #i:I
+      .end local v45           #renamed:Ljava/lang/String;
+      :cond_18
+      move-object/from16 v0, v41
+  
+      iget-object v3, v0, Lcom/android/server/pm/PackageSetting;->origPackage:Lcom/android/server/pm/PackageSettingBase;
+--- 14731,14742 ----
+      .end local v23           #i:I
+      .end local v45           #renamed:Ljava/lang/String;
+      :cond_18
++     move-object/from16 v0, p1
++ 
++     move-object/from16 v1, v41
++ 
++     invoke-static {v0, v1}, Lcom/android/server/pm/PackageManagerService$Injector;->addMiuiExtendFlags(Landroid/content/pm/PackageParser$Package;Lcom/android/server/pm/PackageSetting;)V
++ 
+      move-object/from16 v0, v41
+  
+      iget-object v3, v0, Lcom/android/server/pm/PackageSetting;->origPackage:Lcom/android/server/pm/PackageSettingBase;

@@ -1,0 +1,3 @@
+post-build=sprint/htc_shooter/shooter:4.0.3/IML74K/130920.2:user/release-keys
+post-timestamp=1359596076
+pre-device=shooter

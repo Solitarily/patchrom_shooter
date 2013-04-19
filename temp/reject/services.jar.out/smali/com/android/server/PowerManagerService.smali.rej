@@ -1,0 +1,19 @@
+*** PowerManagerService.smali	2013-04-18 19:42:19.000000000 +0000
+--- PowerManagerService.smali	2013-04-18 19:45:44.000000000 +0000
+***************
+*** 2833,2839 ****
+      throw v4
+  
+      :cond_7
+!     const v3, 0x147ae1
+  
+      .restart local v3       #steps:I
+      goto :goto_3
+--- 2853,2859 ----
+      throw v4
+  
+      :cond_7
+!     const/16 v3, 0x78
+  
+      .restart local v3       #steps:I
+      goto :goto_3
