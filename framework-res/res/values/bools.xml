@@ -24,7 +24,7 @@
     <bool name="config_unplugTurnsOnScreen">true</bool>
     <bool name="config_animateScreenLights">false</bool>
     <bool name="config_enableScreenshotChord">true</bool>
-    <bool name="config_allowAllRotations">false</bool>
+    <bool name="config_allowAllRotations">true</bool>
     <bool name="config_reverseDefaultRotation">false</bool>
     <bool name="config_deskDockEnablesAccelerometer">true</bool>
     <bool name="config_carDockEnablesAccelerometer">true</bool>
@@ -62,7 +62,7 @@
     <bool name="config_actionMenuItemAllCaps">true</bool>
     <bool name="config_allowActionMenuItemTextWithIcon">false</bool>
     <bool name="config_wimaxEnabled">true</bool>
-    <bool name="config_enableDreams">false</bool>
+    <bool name="config_enableDreams">true</bool>
     <bool name="config_cellBroadcastAppLinks">false</bool>
     <bool name="config_forceDisableHardwareKeyboard">false</bool>
     <bool name="config_show_cmIMESwitcher">true</bool>
